@@ -55,13 +55,14 @@ def create_app() -> FastAPI:
         file: Annotated[UploadFile, File()],
         container: Annotated[Container, Depends(get_container)],
     ) -> IngestResponse:
-        if file.content_type != "application/pdf" or not file.filename.lower().endswith(".pdf"):
+        filename = file.filename or ""
+        if file.content_type != "application/pdf" or not filename.lower().endswith(".pdf"):
             raise HTTPException(status_code=415, detail="Only PDF files are supported")
         content = await file.read(container.settings.max_upload_mb * 1024 * 1024 + 1)
         if len(content) > container.settings.max_upload_mb * 1024 * 1024:
             raise HTTPException(status_code=413, detail="PDF exceeds the configured size limit")
         try:
-            return container.ingestion.ingest(file.filename, content)
+            return container.ingestion.ingest(filename, content)
         except ValueError as exc:
             raise HTTPException(status_code=422, detail=str(exc)) from exc
 
