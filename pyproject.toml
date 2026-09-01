@@ -7,7 +7,7 @@ name = "ragsource"
 version = "0.1.0"
 description = "Citation-first RAG assistant for PDF knowledge bases"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [{ name = "Dareen Esleem" }]
 dependencies = [
@@ -38,7 +38,7 @@ addopts = "-q --cov=ragsource --cov-report=term-missing"
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
