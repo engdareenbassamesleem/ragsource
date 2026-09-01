@@ -2,6 +2,7 @@ import hashlib
 from io import BytesIO
 
 from pypdf import PdfReader
+from pypdf.errors import PdfReadError
 
 from ragsource.chunking import chunk_text
 from ragsource.embeddings import Embedder
@@ -20,7 +21,10 @@ class PdfIngestionService:
 
     def ingest(self, filename: str, content: bytes) -> IngestResponse:
         document_id = hashlib.sha256(content).hexdigest()[:16]
-        reader = PdfReader(BytesIO(content))
+        try:
+            reader = PdfReader(BytesIO(content))
+        except (PdfReadError, EOFError, ValueError) as exc:
+            raise ValueError("The uploaded file is not a readable PDF") from exc
         pending: list[tuple[int, str]] = []
         for page_number, page in enumerate(reader.pages, start=1):
             for text in chunk_text(page.extract_text() or "", self.chunk_size, self.chunk_overlap):
