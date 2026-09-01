@@ -1,7 +1,5 @@
 # 📚 RAGSource
 
-[![CI](https://github.com/engdareenbassamesleem/ragsource/actions/workflows/ci.yml/badge.svg)](https://github.com/engdareenbassamesleem/ragsource/actions/workflows/ci.yml)
-
 > A citation-first RAG knowledge assistant for PDF documents, built with Python and FastAPI.
 
 RAGSource turns a collection of PDFs into a searchable knowledge base. It extracts page-level
@@ -94,7 +92,7 @@ Example response:
 
 ## Run locally
 
-Requirements: Python 3.11+.
+Requirements: Python 3.12+.
 
 ```bash
 git clone https://github.com/engdareenbassamesleem/ragsource.git
