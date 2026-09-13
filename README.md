@@ -183,3 +183,7 @@ ragsource/
 ## License
 
 MIT
+
+## Reviewer entry points
+
+Start with src/ragsource/service.py to follow one question through retrieval, thresholding, source metadata and generation. Then inspect tests/test_service.py. The grounded flag indicates that retrieval met the configured threshold; it does not independently verify every generated claim. For a smaller dependency-free lexical retrieval example, see [SourceDesk](https://github.com/engdareenbassamesleem/AI-Chatbot-WebApp).
